@@ -3,9 +3,10 @@
  */
 import isArray from 'lodash/isArray';
 import isPlainObject from 'lodash/isPlainObject';
+import safeJson from './safeJson';
 
 export const deepJson=(json)=>{
-    let rst=JSON.parse(json);
+    let rst=safeJson(json);
     if(isArray(rst)){
         for(let i=0,il=rst.length;i<il;i++){
             if(typeof rst[i]=='string'){
