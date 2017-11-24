@@ -1,7 +1,7 @@
 /**
  * Created by kule on 2017/7/20.
  */
-export const safeJson=function(json){
+export const safeJson=function(json,errVal){
     if(typeof json!='string'){
         return json;
     }
@@ -10,18 +10,10 @@ export const safeJson=function(json){
     }catch(ex){
         console.log('safeJson失败:');
         console.log(json);
+        if(errVal){
+            return errVal;
+        }
     }
     return json;
 };
-export const safeStringify=function(json){
-    if(typeof json=='string'){
-        return json;
-    }
-    try{
-        json=JSON.stringify(json);
-    }catch(ex){
-        console.log('safeStringify失败:');
-        console.log(json);
-    }
-    return json;
-};
+export default safeJson;
