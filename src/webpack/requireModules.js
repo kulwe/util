@@ -1,6 +1,7 @@
-/**
+/*
+/!**
  * Created by kule on 2017/2/14.
- */
+ *!/
 import isFunction from 'lodash/isFunction';
 import filter from 'lodash/filter';
 import map from 'lodash/isFunction';
@@ -31,12 +32,12 @@ export const getContextFiles=function(
     return files;
 };
 
-/**
+/!**
  *
  * @param requireContext require.context('pages/',true,/\'b/)
  * @param filter
  * @returns {boolean}
- */
+ *!/
 export const requireAll=function(requireContext,filter){
     const files=getContextFiles(requireContext,filter);
     return map(files,requireContext);
@@ -82,3 +83,4 @@ export const requireModulesLazy=function(modules,loader,{onlyDefault}={}){
         });
 };
 
+*/
