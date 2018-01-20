@@ -1,5 +1,5 @@
 import inArray from '../inArray';
-export const fillForm=(jqForm,data)=>{
+const fillForm=(data)=>{
     $('input',jqForm).each(function(index){
         const {type,name,value}=this;
         if(!(name in data)){
@@ -9,7 +9,7 @@ export const fillForm=(jqForm,data)=>{
         let newValues=[];
         if(type=='checkbox'){
             newValues=newValue?newValue.split(','):[];
-            this.checked=inArray(newValues,value);
+            this.checked=inArray(value,newValues);
             return;
         }
         $(this).val(newValue);
