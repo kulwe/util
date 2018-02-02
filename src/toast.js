@@ -1,4 +1,5 @@
 import remove from 'lodash/remove';
+import findIndex from 'lodash/findIndex';
 export const generateToast=({
     show,
     hide,
@@ -7,6 +8,21 @@ export const generateToast=({
     let showCount=0;
     let toasts=[];
     let currentId=0;
+
+    const getUpdateArgs=()=>{
+        const {args,id}=toasts[toasts.length-1];
+        if(currentId==id){
+            return;
+        }
+        const _mask=findIndex(toasts,item=>item.mask)>-1;
+        const opt={
+            ...args,
+            mask:_mask,
+            duration:24*60*60*1000//忽略自动关闭功能
+        };
+        return opt;
+    };
+
     const _hide=function(id){
         remove(toasts,item=>item.id==id);
         if(toasts.length>0){
@@ -27,15 +43,18 @@ export const generateToast=({
         toasts.push({
             id,
             args:_args,
-            duration
+            duration,
+            mask:!!mask
         });
 
         setTimeout(function(){
             _hide(id);
         },duration);
 
+        const _mask=findIndex(toasts,item=>item.mask)>-1;
         const opt={
             ...args,
+            mask:_mask,
             duration:24*60*60*1000//忽略自动关闭功能
         };
         currentId=id;

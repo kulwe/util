@@ -2,10 +2,12 @@ const {generateToast}=require('../lib/toast');
 
 const showToast=({
     text,
-    duration
+    duration,
+    mask
 })=>{
     console.log(text);
     console.log(duration);
+    console.log(mask);
 };
 
 const hideToast=()=>{
@@ -33,7 +35,8 @@ toast.show({
 
 toast.show({
     text:'显示5秒3',
-    duration:5000
+    duration:5000,
+    mask:true
 });
 
 toast.show({
