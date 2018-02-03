@@ -7,20 +7,20 @@ export const generateToast=({
 }={})=>{
     let showCount=1;
     let toasts=[];
-    let currentId=0;
+    // let currentId=0;
 
     const getUpdateArgs=()=>{
         const {args,id}=toasts[toasts.length-1];
-        if(currentId==id){
+/*        if(currentId==id){
             return null;
-        }
+        }*/
         const _mask=findIndex(toasts,item=>item.mask)>-1;
         const opt={
             ...args,
             mask:_mask,
             duration:24*60*60*1000//忽略自动关闭功能
         };
-        currentId=id;
+        // currentId=id;
         return opt;
     };
 
