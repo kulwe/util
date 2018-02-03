@@ -47,9 +47,11 @@ export const generateToast=({
             mask:!!mask
         });
 
-        setTimeout(function(){
-            _hide(id);
-        },duration);
+        if(duration){
+            setTimeout(function(){
+                _hide(id);
+            },duration);
+        }
 
         const opt=getUpdateArgs();
         if(toasts.length==1){

@@ -48,3 +48,6 @@ toast.show({
     text:'显示3秒5',
     duration:3000
 });
+toast.show({
+    text:'永远不关闭6'
+});
