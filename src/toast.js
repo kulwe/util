@@ -5,14 +5,14 @@ export const generateToast=({
     hide,
     update
 }={})=>{
-    let showCount=0;
+    let showCount=1;
     let toasts=[];
     let currentId=0;
 
     const getUpdateArgs=()=>{
         const {args,id}=toasts[toasts.length-1];
         if(currentId==id){
-            return;
+            return null;
         }
         const _mask=findIndex(toasts,item=>item.mask)>-1;
         const opt={
@@ -20,18 +20,18 @@ export const generateToast=({
             mask:_mask,
             duration:24*60*60*1000//忽略自动关闭功能
         };
+        currentId=id;
         return opt;
     };
 
     const _hide=function(id){
         remove(toasts,item=>item.id==id);
         if(toasts.length>0){
-            const {args,id}=toasts[toasts.length-1];
-            if(currentId==id){
+            const args=getUpdateArgs();
+            if(!args){
                 return;
             }
             update(args);
-            currentId=id;
             return;
         }
         hide();
@@ -51,13 +51,7 @@ export const generateToast=({
             _hide(id);
         },duration);
 
-        const _mask=findIndex(toasts,item=>item.mask)>-1;
-        const opt={
-            ...args,
-            mask:_mask,
-            duration:24*60*60*1000//忽略自动关闭功能
-        };
-        currentId=id;
+        const opt=getUpdateArgs();
         if(toasts.length==1){
             show(opt);
         }else{
