@@ -100,6 +100,9 @@ export const addOnOneEvent=(event)=>{
     event._off=event.off;
     event.off=function(eventNames,ns,fn){
         const names=castArray(eventNames);
+        if(names.length<1){
+            return this._off('',ns,fn);
+        }
         for(let i=0;i<names.length;i++){
             this._off(names[i],ns,fn);
         }
@@ -107,6 +110,9 @@ export const addOnOneEvent=(event)=>{
     };
 
     event.onOne=function(eventNames,ns,fn){
+        if(!eventNames){
+            return this;
+        }
         this.off(eventNames,ns);
         this.on(eventNames,ns,fn);
         return this;
